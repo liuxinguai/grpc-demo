@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: grpc-consumer
+server:
+  port: 8082
+grpc:
+  client:
+    grpc-provider:
+      address: static://127.0.0.1:9091
+      negotiationType: PLAINTEXT

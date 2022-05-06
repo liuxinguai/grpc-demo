@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package com.github.liuxg.api.grpc;
+import "google/protobuf/any.proto";
+
+option java_multiple_files = false;
+option java_package = "com.github.liuxg.api.grpc";
+option java_outer_classname = "AddressBookProto";
+
+service AddressBookService {
+    rpc getAddressDetail (GetAddressBookRequest) returns (GetAddressBookResponse) {
+    }
+
+}
+
+message GetAddressBookRequest {
+    optional int32 id = 1;
+    optional string name = 2;
+}
+
+
+message Person {
+    optional string name = 1;
+    optional int32 id = 2;
+    optional string email = 3;
+
+    enum PhoneType {
+        MOBILE = 0;
+        HOME = 1;
+        WORK = 2;
+    }
+
+    message PhoneNumber {
+        optional string number = 1;
+        optional PhoneType type = 2;
+//        optional PhoneType type = 2 [default = HOME];
+    }
+
+    repeated PhoneNumber phones = 4;
+}
+
+message GetAddressBookResponse {
+    optional int32 id = 1;
+    optional string name = 2;
+    google.protobuf.Any details = 3;
+    repeated Person people = 4;
+}
